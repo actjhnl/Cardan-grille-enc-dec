@@ -6,7 +6,11 @@ import {
   DEC_RESET
 } from '../../constants';
 import {buildMatrix,flipMatrix,rotateMatrix} from '../../selectors'
-export default (state=[], action) => {
+
+const defaultSize = 10;
+const defaultMatrix = buildMatrix(defaultSize);
+
+export default (state=defaultMatrix, action) => {
   const {type,text,size} = action;
   switch(type){
     case DEC_BUILD_MATRIX:

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {chooseGrid,setOutput} from '../AC';
+import {dec_chooseGrid,enc_chooseGrid,setOutput} from '../AC';
 class MatrixCell extends Component {
   handleClick = (id) => {
-    const {mode,chooseGrid,setOutput,D_matrix} = this.props
-    chooseGrid(id,mode);
-    setOutput(D_matrix,mode);// это же только для дешифровки
+    const {mode,input,dec_chooseGrid,enc_chooseGrid,setOutput,D_matrix,E_matrix,count} = this.props
+    if (mode === 0){
+      dec_chooseGrid(id);
+      setOutput(D_matrix,mode);
+    } else {
+      enc_chooseGrid(id,input,count);
+      setOutput(E_matrix,mode);
+    }
   }
   render() {
     const {active,visited,value,id} = this.props.cell;
@@ -31,6 +36,8 @@ class MatrixCell extends Component {
 
 export default connect(state=>({
   mode:state.mode,
+  input:state.enc.input,
   D_matrix: state.dec.matrix,
   E_matrix: state.enc.matrix,
-}),{chooseGrid,setOutput})(MatrixCell);
+  E_count:state.enc.count
+}),{dec_chooseGrid,enc_chooseGrid,setOutput})(MatrixCell);

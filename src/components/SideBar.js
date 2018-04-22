@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-import {fillMatrix,buildMatrix,setMatrixSize} from '../AC';
-import {buildArrFromText} from '../selectors';
+import {fillMatrix,buildMatrix,setMatrixSize,setOutput} from '../AC';
+import {buildArrFromCryptoText} from '../selectors';
 //material-ui
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -45,7 +45,7 @@ class SideBar extends Component {
     this.props.setMatrixSize(e.target.value,mode)
     this.props.buildMatrix(e.target.value,mode)
 
-    const send = buildArrFromText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
+    const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
     this.props.fillMatrix(send);
   };
   handleChangeInputText =  e => {
@@ -54,11 +54,11 @@ class SideBar extends Component {
     })
   };
 
-  componentDidMount(){
-    console.log('--->mount')
-    const {mode, D_sizeMatrix, E_sizeMatrix} = this.props;
-    this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
-  }
+  // componentDidMount(){
+  //   console.log('--->mount')
+  //   const {mode, D_sizeMatrix, E_sizeMatrix} = this.props;
+  //   this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
+  // }
   // shouldComponentUpdate(nextProps, nextState){
   //   return nextState.inputText !== this.state.inputText;
   // }
@@ -66,25 +66,25 @@ class SideBar extends Component {
   // ПОТОМУ ЧТО ТОГДА СКИДЫВАЕТСЯ ЕЕ СОСТОЯНИЕ
   // МОЖЕТ ОТДЕЛЬНОЕ ДЕЙСТВИЕ, НО НАДО СТОБЫ ВОЗВРАЩАЛ ПРОСТО УЖЕ УСТАНОВЛЕННОЕ СОСТОЯНИЕ
   componentWillUpdate(){
-    const {mode, D_sizeMatrix, E_sizeMatrix} = this.props;
-    this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
+    const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
+    //this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
     if (mode === 0){
-      const send = buildArrFromText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
+      const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
       this.props.fillMatrix(send,mode);
-    }
+    } else setOutput(E_matrix,mode);
     console.log('--->','componentWillUpdate');
   }
   componentDidUpdate(){
-    const {mode, D_sizeMatrix, E_sizeMatrix} = this.props;
-    this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
+    const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
+    //this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
     if (mode === 0){
-      const send = buildArrFromText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
+      const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
       this.props.fillMatrix(send,mode);
-    }
+    } else setOutput(E_matrix,mode);
     console.log('--->','componentDidUpdate');
   }
   render() {
-    const { classes,E_sizeMatrix,D_sizeMatrix,mode } = this.props;
+    const { classes,E_sizeMatrix,D_sizeMatrix,mode,E_output } = this.props;
     return (
       <Drawer
           variant="permanent"
@@ -109,7 +109,7 @@ class SideBar extends Component {
             <Divider />
             <ListItem divider>
               {mode === 0 && <textarea rows="10" value={this.state.inputText} onChange={this.handleChangeInputText} style={{backgroundColor:'#D0CECD',fontSize:'16px'}}/>}
-              {mode === 1 && <textarea rows="10" value='вывод зашифрованной решеки' style={{backgroundColor:'#D0CECD',fontSize:'16px'}}/>}
+              {mode === 1 && <textarea rows="10" value={this.props.E_output} style={{backgroundColor:'#D0CECD',fontSize:'16px'}}/>}
             </ListItem>
 
           </List>
@@ -121,10 +121,27 @@ SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 const materialWrapper = withStyles(styles);
-const reduxWrapper = connect(state=>({
+const reduxWrapper = connect(state=>{
+
+  return {
     mode:state.mode,
     D_sizeMatrix:state.dec.sizeMatrix,
-    E_sizeMatrix:state.enc.sizeMatrix
-}),{buildMatrix,fillMatrix,setMatrixSize});
+    E_sizeMatrix:state.enc.sizeMatrix,
+    E_output: state.enc.output,
+    E_matrix: state.enc.matrix,
+  }
+},{buildMatrix,fillMatrix,setMatrixSize,setOutput});
 
 export default compose(materialWrapper,reduxWrapper)(SideBar);
+/*
+нннуе.еерд
+рддмеррйек
+он,нвнееын
+ынйнйв  ый
+врв  пр  о
+впг пюриро
+рагиокмрми
+ аугмргамм
+мруг у ми
+ии   мввву
+*/

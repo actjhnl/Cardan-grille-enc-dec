@@ -3,36 +3,73 @@ import {
   ENC_BUILD_MATRIX,
   ENC_CHOOSE_GRID,
   ENC_ROTATE,
-  ENC_RESET
+  ENC_RESET,
+  ENC_SET_OUTPUT
 } from '../../constants';
 import {buildMatrix,flipMatrix,rotateMatrix} from '../../selectors'
-export default (state=[], action) => {
-  const {type,text,size} = action;
+
+const defaultSize = 10;
+const defaultMatrix = buildMatrix(defaultSize);
+
+export default (state=defaultMatrix, action) => {
+  const {type} = action;
   switch(type){
-    case ENC_BUILD_MATRIX:
+    case ENC_BUILD_MATRIX:            // собал матрицу пустую
+      console.log('ENC_BUILD_MATRIX');
+      const {size} = action;
       const res = buildMatrix(size);
       return res;
-    case ENC_FILL_MATRIX:
-      for(let i = 0; i < state.length; i++){
-        for(let j = 0; j < state.length; j++){
-          state[i][j].value = text[i][j]
-        }
-      }
-      return [...state];
+
+
+
+    // case ENC_FILL_MATRIX:
+    //   console.log('ENC_FILL_MATRIX');
+    //   for(let i = 0; i < state.length; i++){
+    //     for(let j = 0; j < state.length; j++){
+    //       state[i][j].value = text[i][j]
+    //     }
+    //   }
+    //   return [...state];
     case ENC_CHOOSE_GRID:
-      const {id} = action;
+      console.log('ENC_CHOOSE_GRID');//у меня заполгяется квадрат сразу по порядку
+      const {id,text} = action;
+      // let q = 0;
+      // for(let key = 0; key < state.length; key++){
+      //   for(let i = 0; i < state[key].length; i++){
+      //     if(state[key][i].active === true) q+=1;
+      //   }
+      // }
+
+      //сперва инициализировал всю решетку
       for(let key = 0; key < state.length; key++){
         for(let i = 0; i < state[key].length; i++){
           if(state[key][i].id === id){
             state[key][i].active = state[key][i].active===false?true:false;
+            state[key][i].value = state[key][i].value !== ''?'':state[key][i].value;
+            // state[key][i].value = state[key][i].active===true?text[q]:'';
+            // q+=1;
+          }
+        }
+      }
+      // затм расставляю буквы, чтобы по порядку
+      let q = 0;
+      for(let key = 0; key < state.length; key++){
+        for(let i = 0; i < state[key].length; i++){
+          if(state[key][i].active===true){
+            state[key][i].value = text[q];
+            q+=1;
           }
         }
       }
       return [...state];
     //
     case ENC_ROTATE:
+      const {input,count} = action;
+      console.log('ENC_ROTATE');
+      console.log('reducer',input);
       //create act создал кальку сетки с отметками в виде 1 где сетка отмечена
       let booleanCalca = [];
+      let start_index = 0;
       for(let key = 0; key < state.length; key++){
         booleanCalca[key] = [];
         for(let i = 0; i < state[key].length; i++){
@@ -45,19 +82,41 @@ export default (state=[], action) => {
       //
       for(let key = 0; key < state.length; key++){
         for(let i = 0; i < state[key].length; i++){
-          if(booleanCalca[key][i] === 1) state[key][i].visited = true;
+          if(booleanCalca[key][i] === 1){
+              state[key][i].visited = true;
+          }
+        }
+      }
+
+      // вычисление того, сколько отступать от начала,чтобы подставлять верные знач
+      for(let key = 0; key < state.length; key++){
+        for(let i = 0; i < state[key].length; i++){
+          if(state[key][i].active === true || state[key][i].visited === true){
+            start_index+=1;
+          }
         }
       }
       //
+
+      //
       booleanCalca = rotateMatrix(booleanCalca)
+      let cnt = start_index;
+      console.log('----->',start_index)
         for(let key = 0; key < state.length; key++){
+          //console.log(text[c])
           for(let i = 0; i < state[key].length; i++){
             state[key][i].active = booleanCalca[key][i] === 1 ? true : false;
+            if(state[key][i].active===true && state[key][i].visited === false){
+              state[key][i].value = input[cnt]; // надо два действия. одно инициализирует, второе добавляяет
+              cnt+=1;
+            }
           }
         }
+
       return [...state]
     //
     case ENC_RESET:
+      console.log('ENC_RESET');
       for(let key = 0; key < state.length; key++){
         for(let i = 0; i < state[key].length; i++){
           state[key][i].active = false;
@@ -69,3 +128,8 @@ export default (state=[], action) => {
     default:return state;
   }
 }
+/*
+ЗавоеваниемГалииЮлийЦезарьрасширилримскуюдержавудобереговсевернойАтлантикииподчинилтерриториюФранции
+
+ВирусПрограммныйкодвнедренныйвпрограммуивнедряющийсвоикопиивдругиепрограммыПомимофункциираспространениявирусобычновыполняетещеинекоторуюнежелательнуюдлясистемыфункцию
+*/

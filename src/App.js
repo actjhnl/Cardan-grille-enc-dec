@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {Main} from './components'
-import {setMode} from './AC';
+import {setMode,buildMatrix} from './AC';
 //material-ui
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -27,9 +27,13 @@ class App extends React.Component {
   };
   componentWillUpdate(){
     this.props.setMode(this.state.value);
+    const {mode, D_sizeMatrix, E_sizeMatrix} = this.props;
+    //this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
   }
   componentDidUpdate(){
     this.props.setMode(this.state.value);
+    const {mode, D_sizeMatrix, E_sizeMatrix} = this.props;
+    //this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
   }
   render() {
     return (
@@ -57,7 +61,9 @@ App.propTypes = {
 
 const materialWrapper = withStyles(styles);
 const reduxWrapper = connect(state=>({
-    mode:state.mode
-}),{setMode});
+    mode:state.mode,
+    D_sizeMatrix:state.dec.sizeMatrix,
+    E_sizeMatrix:state.enc.sizeMatrix,
+}),{setMode,buildMatrix});
 
 export default compose(materialWrapper,reduxWrapper)(App);

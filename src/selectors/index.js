@@ -80,7 +80,7 @@ export function buildMatrix(sizeMatrix){
   }
   return res;
 }
-export function buildArrFromText(text,size){
+export function buildArrFromCryptoText(text,size){
   let arr = [];
   for(let i = 0; i < size; i++){
     arr[i] = [];
