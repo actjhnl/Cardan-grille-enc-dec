@@ -12,7 +12,7 @@ import {amber, red, blue} from 'material-ui/colors'
 
 const muiTheme = createMuiTheme({
 	palette: createPalette({
-		primary: blue,
+		primary: red,
 		accent: amber,
 		error: red,
 		type: 'dark'

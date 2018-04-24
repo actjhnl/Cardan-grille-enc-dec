@@ -16,21 +16,26 @@ const styles = theme => ({
     paddingTop: 16,
     paddingBottom: 16,
     marginTop: theme.spacing.unit * 3,
+    backgroundColor:'#EFEBE9',
+    display:'flex',
+    justifyContent:'center',
+    flexDirection: 'column',
   }),
-  matrix: {
-     margin:'0 auto',
+  wrapper: {
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'stretch',
+    flexWrap:'nowrap',
+    flexShrink:1
   },
   button: {
     margin: theme.spacing.unit
   },
-  panel:theme.mixins.gutters({
-    paddingTop: 8,
-    paddingBottom: 8,
-    marginTop: theme.spacing.unit * 3,
-    backgroundColor:'#212121',
-    width: 400,
-    margin: '0 auto'
-  })
+  panel:{
+    backgroundColor:'#EFEBE9',
+    flexShrink:1
+  }
 
 });
 
@@ -48,29 +53,34 @@ class Matrix extends Component {
     else this.props.reset(mode);
   }
   render() {
-    const { classes,mode,D_matrix,E_matrix,reset } = this.props;
+    const { classes,mode,D_matrix,E_matrix,D_sizeMatrix,E_sizeMatrix,reset } = this.props;
     const m = mode === 0 ? D_matrix : E_matrix;
+    const ms = mode === 0 ? D_sizeMatrix : E_sizeMatrix;
     const mtrx = m.map(i=>{
       return <MatrixRow row={i} key={uuid()}/>
     });
     return (
       <div>
-
-          <div className={classes.matrix} style={{width: `calc(40px * ${m})`}}>
-            {mtrx}
-          </div>
-
-            <BottomNavigation
-              showLabels
-              className={classes.panel}
-            >
-              <BottomNavigationAction label="Rotate left" icon={<Undo />} />
-              <BottomNavigationAction label="Reset" icon={<Clear />} onClick={()=>{reset(mode)}}/>
-              <BottomNavigationAction label="Rotate right" icon={<Redo />} onClick={this.handleRotate} />
-            </BottomNavigation>
-          
-
-
+          <Paper className={classes.root} elevation={4}>
+              <div className={classes.wrapper}>
+                <div style={{display:'flex',alignItems:'center'}}>
+                  <Paper zDepth={1} style={{height:'100%'}} className={classes.panel}>
+                    <BottomNavigationAction label="Rotate" icon={<Undo />} style={{color:'#212121',height:'100%'}}/>
+                  </Paper>
+                </div>
+                <div>{mtrx}</div>
+                <div style={{display:'flex',alignItems:'center'}}>
+                  <Paper zDepth={1} style={{height:'100%'}} className={classes.panel}>
+                    <BottomNavigationAction label="Rotate" icon={<Redo />} onClick={this.handleRotate} style={{color:'#212121',height:'100%'}}/>
+                  </Paper>
+                </div>
+              </div>
+              <div style={{display:'flex',justifyContent:'center'}}>
+                <BottomNavigation showLabels style={{width: `calc(32 * ${ms}px)`}} className={classes.panel}>
+                  <BottomNavigationAction label="Reset" icon={<Clear />} onClick={()=>{reset(mode)}} style={{color:'#212121'}}/>
+                </BottomNavigation>
+              </div>
+          </Paper>
       </div>
     );
   }

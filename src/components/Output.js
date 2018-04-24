@@ -12,13 +12,12 @@ const styles = theme => ({
     margin:1,
     paddingTop: 10,
     paddingBottom: 10,
-    backgroundColor:'#212121',
+    backgroundColor:'#EFEBE9',
     padding:0
   }),
   text: {
     width:'100%',
     fontSize:'20px',
-    backgroundColor:'#D0CECD',
     resize:'none',
     padding:'10',
     marginLeft:'-10'

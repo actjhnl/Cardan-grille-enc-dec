@@ -32,7 +32,8 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2,
   },
   option:{
-    backgroundColor:'grey'
+    backgroundColor:'#EFEBE9',
+    color:'#212121'
   }
 });
 
@@ -95,8 +96,8 @@ class SideBar extends Component {
             </ListItem>
             <Divider />
             <ListItem divider>
-              {mode === 0 && <textarea rows="10" value={this.state.inputText} onChange={this.handleChangeInputText} style={{backgroundColor:'#D0CECD',fontSize:'16px'}}/>}
-              {mode === 1 && <textarea rows="10" value={this.props.E_output} style={{backgroundColor:'#D0CECD',fontSize:'16px'}}/>}
+              {mode === 0 && <textarea rows="10" value={this.state.inputText} onChange={this.handleChangeInputText} style={{backgroundColor:'#EFEBE9',fontSize:'16px'}}/>}
+              {mode === 1 && <textarea rows="10" value={this.props.E_output} style={{backgroundColor:'#EFEBE9',fontSize:'16px'}}/>}
             </ListItem>
 
           </List>

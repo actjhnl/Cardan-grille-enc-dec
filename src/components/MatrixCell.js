@@ -21,10 +21,10 @@ class MatrixCell extends Component {
       borderCollapse: 'collapse',
       alignContent:'flex-start',
       cursor:'pointer',
-      backgroundColor:active===true?'#FFD54F':visited===true?'0D47A1':'white',
+      backgroundColor:active===true?'#EF5350':visited===true?'#BCAAA4':'white',
       textAlign:'center',
       fontSize:'24px',
-      color:visited===true?'white':'#212121'
+      color:'#212121'
     }
     return (
       <div style={styles} onClick={()=>this.handleClick(id)}>

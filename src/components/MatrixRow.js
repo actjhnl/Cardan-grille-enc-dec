@@ -15,7 +15,7 @@ class MatrixRow extends Component {
     return (
       <div style={{display:'flex',
       flexDirection:'row',
-      flexWrap:'wrap',
+      flexWrap:'nowrap',
       justifyContent:'center'}}>
         {cell}
       </div>

@@ -12,7 +12,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: '#0D47A1',
+    backgroundColor: '#EFEBE9',
     padding: theme.spacing.unit * 3,
     minWidth: 0,
   },
