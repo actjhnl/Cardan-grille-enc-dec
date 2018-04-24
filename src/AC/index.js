@@ -38,10 +38,10 @@ export function setInputText(text){
 }
 //----------------------------------------------------
 //
-export function fillMatrix(text,mode){
+export function fillMatrix(arrtext,mode){
   return {
     type:mode === 0 ? DEC_FILL_MATRIX : ENC_FILL_MATRIX,
-    text:text
+    arrtext:arrtext
   }
 }
 //

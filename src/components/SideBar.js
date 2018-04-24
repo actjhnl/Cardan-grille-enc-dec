@@ -55,14 +55,14 @@ class SideBar extends Component {
       inputText:e.target.value
     })
   };
-  componentWillUpdate(){
-    const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
-    if (mode === 0){
-      const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
-      this.props.fillMatrix(send,mode);
-    } else setOutput(E_matrix,mode);
-    console.log('--->','componentWillUpdate');
-  }
+  // componentWillUpdate(){
+  //   const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
+  //   if (mode === 0){
+  //     const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
+  //     this.props.fillMatrix(send,mode);
+  //   } else setOutput(E_matrix,mode);
+  //   console.log('--->','componentWillUpdate');
+  // }
   componentDidUpdate(){
     const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
     if (mode === 0){

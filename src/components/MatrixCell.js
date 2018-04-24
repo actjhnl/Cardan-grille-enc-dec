@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {dec_chooseGrid,enc_chooseGrid,setOutput} from '../AC';
 class MatrixCell extends Component {
   handleClick = (id) => {
-    const {mode,input,dec_chooseGrid,enc_chooseGrid,setOutput,D_matrix,E_matrix,count} = this.props
+    const {mode,input,D_matrix,E_matrix,count} = this.props
     if (mode === 0){
-      dec_chooseGrid(id);
-      setOutput(D_matrix,mode);
+      this.props.dec_chooseGrid(id);
+      this.props.setOutput(D_matrix,mode);
     } else {
-      enc_chooseGrid(id,input,count);
-      setOutput(E_matrix,mode);
+      this.props.enc_chooseGrid(id,input,count);
+      this.props.setOutput(E_matrix,mode);
     }
   }
   render() {

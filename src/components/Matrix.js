@@ -64,13 +64,13 @@ class Matrix extends Component {
           <Paper className={classes.root} elevation={4}>
               <div className={classes.wrapper}>
                 <div style={{display:'flex',alignItems:'center'}}>
-                  <Paper zDepth={1} style={{height:'100%'}} className={classes.panel}>
+                  <Paper style={{height:'100%'}} className={classes.panel}>
                     <BottomNavigationAction label="Rotate" icon={<Undo />} style={{color:'#212121',height:'100%'}}/>
                   </Paper>
                 </div>
                 <div>{mtrx}</div>
                 <div style={{display:'flex',alignItems:'center'}}>
-                  <Paper zDepth={1} style={{height:'100%'}} className={classes.panel}>
+                  <Paper style={{height:'100%'}} className={classes.panel}>
                     <BottomNavigationAction label="Rotate" icon={<Redo />} onClick={this.handleRotate} style={{color:'#212121',height:'100%'}}/>
                   </Paper>
                 </div>

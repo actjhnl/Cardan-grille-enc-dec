@@ -17,9 +17,11 @@ export default (state=defaultMatrix, action) => {
       const res = buildMatrix(size);
       return res;
     case DEC_FILL_MATRIX:
+      const {arrtext}=action;
+      console.log(arrtext)
       for(let i = 0; i < state.length; i++){
         for(let j = 0; j < state.length; j++){
-          state[i][j].value = text[i][j]
+          state[i][j].value = arrtext[i][j]
         }
       }
       return [...state];
