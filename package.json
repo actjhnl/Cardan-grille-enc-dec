@@ -1,8 +1,8 @@
 {
-  "name": "electron-with-create-react-app",
+  "name": "Cardan-grille",
   "version": "0.1.0",
   "description": "Electron app powered by CRA",
-  "author": "OSS Community",
+  "author": "tjnhl",
   "private": true,
   "devDependencies": {
     "electron": "^1.4.15",
@@ -35,7 +35,7 @@
     "postinstall": "install-app-deps"
   },
   "build": {
-    "appId": "com.electron.electron-with-create-react-app",
+    "appId": "com.electron.cardan-grill",
     "win": {
       "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
     },

@@ -12,7 +12,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#0D47A1',
     padding: theme.spacing.unit * 3,
     minWidth: 0,
   },
@@ -24,6 +24,7 @@ class Content extends Component {
     const { classes } = this.props;
     return (
       <main className={classes.content}>
+        <div className={classes.toolbar} />
         <Matrix/>
         <Output/>
       </main>

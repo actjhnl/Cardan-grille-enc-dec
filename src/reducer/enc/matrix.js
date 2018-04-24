@@ -19,35 +19,15 @@ export default (state=defaultMatrix, action) => {
       const {size} = action;
       const res = buildMatrix(size);
       return res;
-
-
-
-    // case ENC_FILL_MATRIX:
-    //   console.log('ENC_FILL_MATRIX');
-    //   for(let i = 0; i < state.length; i++){
-    //     for(let j = 0; j < state.length; j++){
-    //       state[i][j].value = text[i][j]
-    //     }
-    //   }
-    //   return [...state];
     case ENC_CHOOSE_GRID:
       console.log('ENC_CHOOSE_GRID');//у меня заполгяется квадрат сразу по порядку
       const {id,text} = action;
-      // let q = 0;
-      // for(let key = 0; key < state.length; key++){
-      //   for(let i = 0; i < state[key].length; i++){
-      //     if(state[key][i].active === true) q+=1;
-      //   }
-      // }
-
       //сперва инициализировал всю решетку
       for(let key = 0; key < state.length; key++){
         for(let i = 0; i < state[key].length; i++){
           if(state[key][i].id === id){
             state[key][i].active = state[key][i].active===false?true:false;
             state[key][i].value = state[key][i].value !== ''?'':state[key][i].value;
-            // state[key][i].value = state[key][i].active===true?text[q]:'';
-            // q+=1;
           }
         }
       }
@@ -65,7 +45,6 @@ export default (state=defaultMatrix, action) => {
     //
     case ENC_ROTATE:
       const {input,count} = action;
-      console.log('ENC_ROTATE');
       console.log('reducer',input);
       //create act создал кальку сетки с отметками в виде 1 где сетка отмечена
       let booleanCalca = [];
@@ -97,11 +76,9 @@ export default (state=defaultMatrix, action) => {
         }
       }
       //
-
       //
       booleanCalca = rotateMatrix(booleanCalca)
       let cnt = start_index;
-      console.log('----->',start_index)
         for(let key = 0; key < state.length; key++){
           //console.log(text[c])
           for(let i = 0; i < state[key].length; i++){
@@ -112,7 +89,6 @@ export default (state=defaultMatrix, action) => {
             }
           }
         }
-
       return [...state]
     //
     case ENC_RESET:
@@ -128,8 +104,3 @@ export default (state=defaultMatrix, action) => {
     default:return state;
   }
 }
-/*
-ЗавоеваниемГалииЮлийЦезарьрасширилримскуюдержавудобереговсевернойАтлантикииподчинилтерриториюФранции
-
-ВирусПрограммныйкодвнедренныйвпрограммуивнедряющийсвоикопиивдругиепрограммыПомимофункциираспространениявирусобычновыполняетещеинекоторуюнежелательнуюдлясистемыфункцию
-*/

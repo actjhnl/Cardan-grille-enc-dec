@@ -6,7 +6,6 @@ const styles = {
   border:'1px solid black',
   borderCollapse: 'collapse',
   alignContent:'flex-start',
-  //backgroundColor:el.active===true?'green':el.visited===true?'grey':''
 }
 class MatrixRow extends Component {
   render() {

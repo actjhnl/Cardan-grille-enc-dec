@@ -16,6 +16,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
+    backgroundColor:'#212121'
   },
   toolbar: theme.mixins.toolbar,
   //
@@ -53,21 +54,8 @@ class SideBar extends Component {
       inputText:e.target.value
     })
   };
-
-  // componentDidMount(){
-  //   console.log('--->mount')
-  //   const {mode, D_sizeMatrix, E_sizeMatrix} = this.props;
-  //   this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
-  // }
-  // shouldComponentUpdate(nextProps, nextState){
-  //   return nextState.inputText !== this.state.inputText;
-  // }
-  //  ПОШЩАМАНИТЬ НАД ТЕМ,ЧТОБЫ ПРИ СМЕНЕ РЕЖИМА МАТРИЦА НЕ СТРОИЛАСЬ ЗАНОВО
-  // ПОТОМУ ЧТО ТОГДА СКИДЫВАЕТСЯ ЕЕ СОСТОЯНИЕ
-  // МОЖЕТ ОТДЕЛЬНОЕ ДЕЙСТВИЕ, НО НАДО СТОБЫ ВОЗВРАЩАЛ ПРОСТО УЖЕ УСТАНОВЛЕННОЕ СОСТОЯНИЕ
   componentWillUpdate(){
     const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
-    //this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
     if (mode === 0){
       const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
       this.props.fillMatrix(send,mode);
@@ -76,7 +64,6 @@ class SideBar extends Component {
   }
   componentDidUpdate(){
     const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
-    //this.props.buildMatrix(mode === 0 ? D_sizeMatrix : E_sizeMatrix,mode);
     if (mode === 0){
       const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
       this.props.fillMatrix(send,mode);
@@ -133,15 +120,3 @@ const reduxWrapper = connect(state=>{
 },{buildMatrix,fillMatrix,setMatrixSize,setOutput});
 
 export default compose(materialWrapper,reduxWrapper)(SideBar);
-/*
-нннуе.еерд
-рддмеррйек
-он,нвнееын
-ынйнйв  ый
-врв  пр  о
-впг пюриро
-рагиокмрми
- аугмргамм
-мруг у ми
-ии   мввву
-*/

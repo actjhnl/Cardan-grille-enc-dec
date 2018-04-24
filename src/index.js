@@ -8,11 +8,11 @@ import store from './store'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import createPalette from 'material-ui/styles/createPalette'
 import createMuiTheme from 'material-ui/styles/createMuiTheme'
-import {green, amber, red} from 'material-ui/colors'
+import {amber, red, blue} from 'material-ui/colors'
 
 const muiTheme = createMuiTheme({
 	palette: createPalette({
-		primary: green,
+		primary: blue,
 		accent: amber,
 		error: red,
 		type: 'dark'

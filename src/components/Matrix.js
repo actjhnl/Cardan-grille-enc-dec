@@ -27,6 +27,9 @@ const styles = theme => ({
     paddingTop: 8,
     paddingBottom: 8,
     marginTop: theme.spacing.unit * 3,
+    backgroundColor:'#212121',
+    width: 400,
+    margin: '0 auto'
   })
 
 });
@@ -56,14 +59,17 @@ class Matrix extends Component {
           <div className={classes.matrix} style={{width: `calc(40px * ${m})`}}>
             {mtrx}
           </div>
-          <BottomNavigation
-            showLabels
-            className={classes.panel}
-          >
-            <BottomNavigationAction label="Rotate left" icon={<Undo />}/>
-            <BottomNavigationAction label="Reset" icon={<Clear />} onClick={()=>{reset(mode)}}/>
-            <BottomNavigationAction label="Rotate right" icon={<Redo />} onClick={this.handleRotate} />
-          </BottomNavigation>
+
+            <BottomNavigation
+              showLabels
+              className={classes.panel}
+            >
+              <BottomNavigationAction label="Rotate left" icon={<Undo />} />
+              <BottomNavigationAction label="Reset" icon={<Clear />} onClick={()=>{reset(mode)}}/>
+              <BottomNavigationAction label="Rotate right" icon={<Redo />} onClick={this.handleRotate} />
+            </BottomNavigation>
+          
+
 
       </div>
     );

@@ -9,9 +9,20 @@ import {Paper,Typography} from 'material-ui';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
-    paddingTop: 0,
-    paddingBottom: 0,
+    margin:1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor:'#212121',
+    padding:0
   }),
+  text: {
+    width:'100%',
+    fontSize:'20px',
+    backgroundColor:'#D0CECD',
+    resize:'none',
+    padding:'10',
+    marginLeft:'-10'
+  }
 });
 
 class Output extends Component {
@@ -35,8 +46,8 @@ class Output extends Component {
       <div>
       <Paper className={classes.root} elevation={1}>
         <textarea value={mode===0 ? D_output : this.state.inputText}
-                  rows='10'
-                  style={{width:'100%',fontSize:'20px',backgroundColor:'#D0CECD',resize:'none'}}
+                  rows='8'
+                  className={classes.text}
                   onChange={mode === 1 && this.handleChange}
         />
       </Paper>
