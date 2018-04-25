@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {dec_chooseGrid,enc_chooseGrid,setOutput} from '../AC';
+import {initializeActiveMatrixCell,RenderingRelevantOutput} from '../../AC';
 class MatrixCell extends Component {
   handleClick = (id) => {
     const {mode,input,D_matrix,E_matrix,count} = this.props
     if (mode === 0){
-      this.props.dec_chooseGrid(id);
-      this.props.setOutput(D_matrix,mode);
+      this.props.initializeActiveMatrixCell(id);
+      this.props.RenderingRelevantOutput(D_matrix,mode);
     } else {
-      this.props.enc_chooseGrid(id,input,count);
-      this.props.setOutput(E_matrix,mode);
+      this.props.initializeActiveMatrixCell(id,input,count);
+      this.props.RenderingRelevantOutput(E_matrix,mode);
     }
   }
   render() {
@@ -40,4 +40,4 @@ export default connect(state=>({
   D_matrix: state.dec.matrix,
   E_matrix: state.enc.matrix,
   E_count:state.enc.count
-}),{dec_chooseGrid,enc_chooseGrid,setOutput})(MatrixCell);
+}),{initializeActiveMatrixCell,RenderingRelevantOutput})(MatrixCell);

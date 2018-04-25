@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
-import {DEC_SET_MATRIX_SIZE,DEC_INC_COUNT,DEC_RESET,SET_MODE} from '../../constants';
+import {
+  DEC_SET_MATRIX_SIZE,
+  DEC_INC_COUNT,
+  DEC_RESET
+} from '../../constants';
 import matrixReducer from './matrix';
 import outputReducer from './output';
 export default combineReducers({

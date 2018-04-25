@@ -5,7 +5,7 @@ import {
   DEC_ROTATE,
   DEC_RESET
 } from '../../constants';
-import {buildMatrix,flipMatrix,rotateMatrix} from '../../selectors'
+import {buildMatrix,rotateMatrix} from '../../selectors'
 
 const defaultSize = 10;
 const defaultMatrix = buildMatrix(defaultSize);

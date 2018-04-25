@@ -1,107 +1,83 @@
-import {
-  SET_MODE,
-  DEC_SET_MATRIX_SIZE , ENC_SET_MATRIX_SIZE,
-  DEC_FILL_MATRIX , ENC_FILL_MATRIX,
-  DEC_BUILD_MATRIX , ENC_BUILD_MATRIX,
-  DEC_CHOOSE_GRID , ENC_CHOOSE_GRID,
-  DEC_ROTATE , ENC_ROTATE,
-  DEC_SET_OUTPUT , ENC_SET_OUTPUT,
-  DEC_UPDATE_OUTPUT , ENC_UPDATE_OUTPUT,
-  DEC_RESET , ENC_RESET,
-  DEC_INC_COUNT , ENC_INC_COUNT,
-  ENC_SET_INPUT_TEXT, END_ENC
-} from '../constants'
+import * as act from '../constants'
 
 export function setMode(value){
   return {
-    type: SET_MODE,
+    type: act.SET_MODE,
     value: value
   }
 }
 export function setMatrixSize(value,mode){
   return {
-    type:mode === 0 ? DEC_SET_MATRIX_SIZE : ENC_SET_MATRIX_SIZE,
+    type:mode === 0 ? act.DEC_SET_MATRIX_SIZE : act.ENC_SET_MATRIX_SIZE,
     value:value
   }
 }
 export function buildMatrix(size,mode){
   return {
-    type:mode === 0 ? DEC_BUILD_MATRIX : ENC_BUILD_MATRIX,
+    type:mode === 0 ? act.DEC_BUILD_MATRIX : act.ENC_BUILD_MATRIX,
     size:size
   }
 }
-export function setInputText(text){
+export function fillMatrix(arrtext){
   return {
-    type: ENC_SET_INPUT_TEXT,
-    text: text
-  }
-}
-//----------------------------------------------------
-//
-export function fillMatrix(arrtext,mode){
-  return {
-    type:mode === 0 ? DEC_FILL_MATRIX : ENC_FILL_MATRIX,
+    type:act.DEC_FILL_MATRIX,
     arrtext:arrtext
   }
 }
-//
-export function dec_chooseGrid(id){ // частная
+export function RenderingRelevantOutput(text,mode){
   return {
-    type:DEC_CHOOSE_GRID,
-    id:id
-  }
-}
-export function enc_chooseGrid(id,text,count){ // частная
-  return {
-    type:ENC_CHOOSE_GRID,
-    id:id,
-    text:text,
-    count:count
-  }
-}
-//
-export function dec_rotate(){ //частная
-  return {
-    type:DEC_ROTATE
-  }
-}
-export function enc_rotate(input,count){ //частная
-  //console.log('AC',text)
-  return {
-    type:ENC_ROTATE,
-    input:input,
-    count:count
-  }
-}
-//
-export function setOutput(text,mode){//??
-  return {
-    type:mode === 0 ? DEC_SET_OUTPUT : ENC_SET_OUTPUT,
+    type:mode === 0 ? act.DEC_SET_OUTPUT : act.ENC_SET_OUTPUT,
     text:text
   }
 }
-//
-export function updateOutput(text,mode){//??
-  return {
-    type:mode === 0 ? DEC_UPDATE_OUTPUT : ENC_UPDATE_OUTPUT,
-    text:text
+export function rotate(...rest){
+  if (rest.length > 0){
+    return {
+      type: act.ENC_ROTATE,
+      input:rest[0],
+    }
+  }
+  else {
+    return {
+      type: act.DEC_ROTATE
+    }
   }
 }
-//
 export function incCount(mode){
   return {
-    type:mode === 0 ? DEC_INC_COUNT : ENC_INC_COUNT
+    type:mode === 0 ? act.DEC_INC_COUNT : act.ENC_INC_COUNT
   }
 }
-//
 export function reset(mode){
   return {
-    type:mode === 0 ? DEC_RESET : ENC_RESET
+    type:mode === 0 ? act.DEC_RESET : act.ENC_RESET
   }
 }
-
-export function endEnc(){
+export function RenderingRelevantOutputAfterRotate(text){
   return {
-    type: END_ENC
+    type: act.DEC_UPDATE_OUTPUT,
+    text:text
+  }
+}
+export function initializeActiveMatrixCell(...rest){
+  if (rest.length > 1){
+    return {
+      type: act.ENC_CHOOSE_GRID,
+      id:rest[0],
+      text:rest[1],
+      count:rest[2]
+    }
+  }
+  else {
+    return {
+      type: act.DEC_CHOOSE_GRID,
+      id:rest[0]
+    }
+  }
+}
+export function inputTextForEnrypt(text){
+  return {
+    type: act.ENC_SET_INPUT_TEXT,
+    text: text
   }
 }

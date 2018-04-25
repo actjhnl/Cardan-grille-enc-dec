@@ -81,7 +81,6 @@ export function buildMatrix(sizeMatrix){
   return res;
 }
 export function buildArrFromCryptoText(text,size){
-  //console.log('-------------')
   let arr = [];
   for(let i = 0; i < size; i++){
     arr[i] = [];
@@ -89,15 +88,12 @@ export function buildArrFromCryptoText(text,size){
       arr[i].push('');
     }
   }
-  //console.log(arr)
   const s = text.split('\n');
-  //console.log(s);
   for(let i = 0; i < s.length; i++){
     let eLength = s[i].length > size ? size : s[i].length;
     for(let j = 0; j < eLength; j++){
       arr[i][j]=s[i][j];
     }
   }
-  //console.log(arr);
   return arr;
 }

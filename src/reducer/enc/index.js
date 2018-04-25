@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import {ENC_SET_MATRIX_SIZE,ENC_INC_COUNT,ENC_RESET,SET_MODE,ENC_SET_INPUT_TEXT} from '../../constants';
+import {
+  ENC_SET_MATRIX_SIZE,
+  ENC_INC_COUNT,
+  ENC_RESET,
+  ENC_SET_INPUT_TEXT,
+} from '../../constants';
 import matrixReducer from './matrix';
 import outputReducer from './output';
 export default combineReducers({

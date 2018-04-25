@@ -6,7 +6,7 @@ import {setMode} from './AC';
 //material-ui
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import {AppBar,Typography,Tabs } from 'material-ui';
+import {AppBar,Tabs } from 'material-ui';
 import { Tab } from 'material-ui/Tabs';
 
 import {styles} from './AppStyle'

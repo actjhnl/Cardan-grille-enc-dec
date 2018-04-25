@@ -14,7 +14,6 @@ export default (state='', action) => {
              if(text[i][j].active===true)
                res+=text[i][j].value
           }
-          //res+=' '
         }
       return res;
     case DEC_UPDATE_OUTPUT:
@@ -23,7 +22,6 @@ export default (state='', action) => {
            if(text[i][j].active===true)
              state+=text[i][j].value
         }
-        //state+=' '
       }
       return state;
     case DEC_RESET:

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-import {fillMatrix,buildMatrix,setMatrixSize,setOutput} from '../AC';
-import {buildArrFromCryptoText} from '../selectors';
+import {fillMatrix,buildMatrix,setMatrixSize,RenderingRelevantOutput} from '../../AC';
+import {buildArrFromCryptoText} from '../../selectors';
 //material-ui
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -10,32 +10,7 @@ import {Drawer,ListItem,List,ListItemText,Divider,Input,Select} from 'material-u
 import { InputLabel } from 'material-ui/Input';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 
-const drawerWidth = 240;
-
-const styles = theme => ({
-  drawerPaper: {
-    position: 'relative',
-    width: drawerWidth,
-    backgroundColor:'#212121'
-  },
-  toolbar: theme.mixins.toolbar,
-  //
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
-  option:{
-    backgroundColor:'#EFEBE9',
-    color:'#212121'
-  }
-});
+import {styles,drawerWidth} from './SideBarStyles';
 
 
 class SideBar extends Component {
@@ -55,20 +30,12 @@ class SideBar extends Component {
       inputText:e.target.value
     })
   };
-  // componentWillUpdate(){
-  //   const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
-  //   if (mode === 0){
-  //     const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
-  //     this.props.fillMatrix(send,mode);
-  //   } else setOutput(E_matrix,mode);
-  //   console.log('--->','componentWillUpdate');
-  // }
   componentDidUpdate(){
     const {mode, D_sizeMatrix, E_sizeMatrix, setOutput,E_matrix} = this.props;
     if (mode === 0){
       const send = buildArrFromCryptoText(this.state.inputText,mode === 0 ? D_sizeMatrix : E_sizeMatrix)
       this.props.fillMatrix(send,mode);
-    } else setOutput(E_matrix,mode);
+    } else RenderingRelevantOutput(E_matrix,mode);
     console.log('--->','componentDidUpdate');
   }
   render() {
@@ -96,10 +63,9 @@ class SideBar extends Component {
             </ListItem>
             <Divider />
             <ListItem divider>
-              {mode === 0 && <textarea rows="10" value={this.state.inputText} onChange={this.handleChangeInputText} style={{backgroundColor:'#EFEBE9',fontSize:'16px'}}/>}
-              {mode === 1 && <textarea rows="10" value={this.props.E_output} style={{backgroundColor:'#EFEBE9',fontSize:'16px'}}/>}
+              {mode === 0 && <textarea rows="10" value={this.state.inputText} onChange={this.handleChangeInputText} className={classes.textarea}/>}
+              {mode === 1 && <textarea rows="10" value={this.props.E_output} className={classes.textarea}/>}
             </ListItem>
-
           </List>
       </Drawer>
     );
@@ -118,6 +84,6 @@ const reduxWrapper = connect(state=>{
     E_output: state.enc.output,
     E_matrix: state.enc.matrix,
   }
-},{buildMatrix,fillMatrix,setMatrixSize,setOutput});
+},{buildMatrix,fillMatrix,setMatrixSize,RenderingRelevantOutput});
 
 export default compose(materialWrapper,reduxWrapper)(SideBar);

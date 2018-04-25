@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-import {setInputText} from '../AC'
+import {inputTextForEnrypt} from '../AC'
 //material-ui
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -34,10 +34,10 @@ class Output extends Component {
     })
   }
   componentWillUpdate(){
-    this.props.setInputText(this.state.inputText)
+    this.props.inputTextForEnrypt(this.state.inputText)
   }
   componentDidUpdate(){
-    this.props.setInputText(this.state.inputText)
+    this.props.inputTextForEnrypt(this.state.inputText)
   }
   render() {
     const { classes,D_output,mode } = this.props;
@@ -63,6 +63,6 @@ const reduxWrapper = connect(state=>({
     input: state.enc.input,
     mode: state.mode,
     D_output: state.dec.output
-}),{setInputText});
+}),{inputTextForEnrypt});
 
 export default compose(materialWrapper,reduxWrapper)(Output);

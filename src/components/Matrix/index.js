@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import uuid from 'uuid/v4';
-import {dec_rotate,enc_rotate,updateOutput,incCount,reset,endEnc,setOutput} from '../AC'
-import {MatrixRow} from './';
+import {RenderingRelevantOutputAfterRotate,incCount,reset,RenderingRelevantOutput,rotate} from '../../AC'
+import MatrixRow from './MatrixRow';
 //material-ui
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -11,41 +11,15 @@ import {Paper,Card,Button } from 'material-ui';
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import {Undo,Clear,Redo} from '@material-ui/icons';
 
-const styles = theme => ({
-  root: theme.mixins.gutters({
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3,
-    backgroundColor:'#EFEBE9',
-    display:'flex',
-    justifyContent:'center',
-    flexDirection: 'column',
-  }),
-  wrapper: {
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'stretch',
-    flexWrap:'nowrap',
-    flexShrink:1
-  },
-  button: {
-    margin: theme.spacing.unit
-  },
-  panel:{
-    backgroundColor:'#EFEBE9',
-    flexShrink:1
-  }
-
-});
+import {styles} from './MatrixStyle';
 
 class Matrix extends Component {
   handleRotate = () => {
-    const {D_matrix,E_matrix,D_count,E_count,mode,input,setOutput} = this.props;
-    mode === 0 && this.props.dec_rotate();
-    mode == 1 && this.props.enc_rotate(input,E_count)
-    this.props.updateOutput(mode === 0 ? D_matrix : E_matrix,mode);
-    mode === 1 && setOutput(E_matrix,mode)
+    const {D_matrix,E_matrix,D_count,E_count,mode,input} = this.props;
+    mode === 0 && this.props.rotate();
+    mode == 1 && this.props.rotate(input,E_count)
+    this.props.RenderingRelevantOutputAfterRotate(mode === 0 ? D_matrix : E_matrix,mode);
+    mode === 1 && this.props.RenderingRelevantOutput(E_matrix,mode)
     const c = mode === 0 ? D_count : E_count;
     if(c < 4){
       this.props.incCount(mode);
@@ -99,6 +73,6 @@ const reduxWrapper = connect(state=>({
     E_matrix: state.enc.matrix,
     D_count:state.dec.count,
     E_count:state.enc.count
-}),{dec_rotate,updateOutput,incCount,reset,enc_rotate,endEnc,setOutput});
+}),{RenderingRelevantOutputAfterRotate,incCount,reset,RenderingRelevantOutput,rotate});
 
 export default compose(materialWrapper,reduxWrapper)(Matrix);

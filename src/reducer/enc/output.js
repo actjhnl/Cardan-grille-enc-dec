@@ -1,7 +1,5 @@
 import {
-  ENC_SET_OUTPUT,
-  //UPDATE_OUTPUT,
-  //RESET
+  ENC_SET_OUTPUT
 } from '../../constants'
 
 export default (state='', action) => {
